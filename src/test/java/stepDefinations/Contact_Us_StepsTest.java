@@ -13,6 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 
+
 import java.util.Random;
 
 public class Contact_Us_StepsTest
@@ -27,7 +28,7 @@ public class Contact_Us_StepsTest
         @Before
                 public void setup()
         {
-            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"/src/main/java/drivers/chromedriver");
+            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"/src/test/java/drivers/chromedriver");
             //        System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+ "/src/main/java/drivers/chromedriver");
 
             ChromeOptions chromeOptions= new ChromeOptions();
@@ -67,10 +68,11 @@ public class Contact_Us_StepsTest
     public void user_enters_unique_email_id() {
             driver.findElement(By.xpath("//*[@id=\"contact_form\"]/input[3]")).sendKeys("farzisv" + generateRandomNumber(1,100) + "@gmail.com");
     }
-    @And("User enetrs comment")
+    @And("User enters comment")
     public void user_enetrs_comment() {
             driver.findElement(By.xpath("//*[@id=\"contact_form\"]/textarea")).sendKeys("Welcome");
     }
+
     @And("User clicks on submit button")
     public void user_clicks_on_submit_button() {
             driver.findElement(By.xpath("//*[@id=\"form_buttons\"]/input[2]")).click();
@@ -85,4 +87,34 @@ public class Contact_Us_StepsTest
     }
 
 
+//    @When("User enters specific {string} Farzi")
+//    public void userEntersSpecificFarzi(DataTable dataTable) {
+//
+//    }
+
+    @When("User enters specific first name {string}")
+    public void userEntersSpecific(String firstName) {
+        driver.findElement(By.xpath("//*[@id=\"contact_form\"]/input[1]"))
+                .sendKeys(firstName + generateRandomNumber(1,10));
+
+    }
+
+    @And("User enters specific last name {string}")
+    public void userEntersSpecificLastName(String lastName) {
+        driver.findElement(By.xpath("//*[@id=\"contact_form\"]/input[2]"))
+                .sendKeys(lastName + generateRandomNumber(1,1000));
+    }
+
+    @And("User enters specific email id {string}")
+    public void userEntersSpecificEmailId(String email) {
+        driver.findElement(By.xpath("//*[@id=\"contact_form\"]/input[3]")).
+                sendKeys(email);
+
+    }
+
+    @And("User enters specific comment {string}")
+    public void userEntersSpecificComment(String comment) {
+        driver.findElement(By.xpath("//*[@id=\"contact_form\"]/textarea")).sendKeys(comment);
+
+    }
 }
