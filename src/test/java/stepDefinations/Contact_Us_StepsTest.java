@@ -1,55 +1,27 @@
 package stepDefinations;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
+
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
-import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
-
+import pageObjects.Base_PO;
 
 import java.util.Random;
 
-public class Contact_Us_StepsTest
+import static driver.DriverFactory.getDriver;
 
-{
-   private WebDriver driver;
-
-     int generateRandomNumber(int min, int max){
-       Random random= new Random();
-       return random.nextInt(max-min) +min;
-   }
-        @Before
-                public void setup()
-        {
-            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"/src/test/java/drivers/chromedriver");
-            //        System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+ "/src/main/java/drivers/chromedriver");
-
-            ChromeOptions chromeOptions= new ChromeOptions();
-            //   chromeOptions.
-           chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-           driver= new ChromeDriver(chromeOptions);
-            driver.manage().window().maximize();
-
-        }
-        @After
-        public void teardown()
-        {
-            driver.quit();
-        }
+public class Contact_Us_StepsTest extends Base_PO {
+private WebDriver driver= getDriver();
 
 
+     @Given("User is on ContactUs Page")
+    public void user_is_on_contact_us_page()  {
+            navigateToURL("http://www.webdriveruniversity.com/Contact-Us/contactus.html");
 
-    @Given("User is on ContactUs Page")
-    public void user_is_on_contact_us_page() throws InterruptedException {
-            driver.get("http://www.webdriveruniversity.com/Contact-Us/contactus.html");
-            Thread.sleep(5000);
 
     }
     @When("User enters unique first name")
