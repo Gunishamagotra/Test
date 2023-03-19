@@ -31,6 +31,7 @@ private static WebDriver createDriver(){
 
             System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"/src/test/java/driver/drivers/chromedriver");
             ChromeOptions chromeOptions= new ChromeOptions();
+         //   chromeOptions.
             chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
             driver= new ChromeDriver(chromeOptions);
            // driver.manage().window().maximize();
@@ -53,23 +54,28 @@ private static WebDriver createDriver(){
 
 public static String getBrowserType() {
     String browserType = null;
+    String browserTypeRemoteValue = System.getProperty("browserType");
     try {
+        if (browserTypeRemoteValue == null || browserTypeRemoteValue.isEmpty()) {
+            Properties properties = new Properties();
+            FileInputStream file = new FileInputStream(System.getProperty("user.dir") + "/src/main/properties/config.properties");
+            properties.load(file);
+            browserType = properties.getProperty("browser").toLowerCase().trim();
+        } else {
+            browserType = browserTypeRemoteValue;
+        }}
+        catch(IOException io){
 
-        Properties properties = new Properties();
-        FileInputStream file = new FileInputStream(System.getProperty("user.dir") + "/src/main/properties/config.properties");
-        properties.load(file);
-        browserType = properties.getProperty("browser").toLowerCase().trim();
-    } catch (IOException io) {
-
-        System.out.println(io.getMessage());
+            System.out.println(io.getMessage());
+        }
+        return browserType;
     }
-    return browserType;
-}
 
 public static void tearDownBrowser()
     {
         driver.get().quit();
         driver.remove();
     }
+
 
 }

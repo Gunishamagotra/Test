@@ -1,13 +1,14 @@
 package pageObjects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.testng.Assert;
 
 public class Contact_Us_PO extends Base_PO{
-
     public Contact_Us_PO(){
         super();
     }
@@ -56,6 +57,7 @@ public class Contact_Us_PO extends Base_PO{
     public void validateSuccesfulMessage(String message){
         WebElement Test = getDriver().findElement(By.xpath("//div[@id='contact_reply']/h1"));
         Assert.assertEquals(Test.getText(),message);
+       // getDriver().switchTo().
     }
 
 

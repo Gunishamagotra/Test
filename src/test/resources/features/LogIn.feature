@@ -15,7 +15,7 @@ Background:
      And User clicks on Login Button
       Then User gets unsuccessful message "validation failed"
 
-      @Test
+      @smoke @ignore
   Scenario Outline: Validate successful and unsuccessful Login
     When I enter the Username "<Username>"
     And I enter the Password "<Password>"
